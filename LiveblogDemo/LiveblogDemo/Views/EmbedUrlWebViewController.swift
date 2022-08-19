@@ -30,11 +30,12 @@ class EmbedUrlWebViewController: UIViewController, WKNavigationDelegate, WKUIDel
 	}
 
 	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-		if navigationAction.navigationType == .linkActivated, let url = navigationAction.request.url, url.scheme?.lowercased() == "mailto" { // mail url from web content
+		if let url = navigationAction.request.url, url.scheme?.lowercased() == "mailto" { // mail url from web content
 			if MFMessageComposeViewController.canSendText() {
 				let composeVC = MFMailComposeViewController()
 				composeVC.mailComposeDelegate = self
 				composeVC.setToRecipients([url.email ?? ""])
+				composeVC.setMessageBody(url.emailBody ?? "", isHTML: false)
 				self.present(composeVC, animated: true, completion: nil)
 				decisionHandler(.cancel)
 				return
