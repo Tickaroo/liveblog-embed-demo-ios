@@ -3,7 +3,15 @@ import Foundation
 struct Constants {
 	static let embedUrl = URL(string: "http://builds.tickaroo.net/feedtest/demo-apps/live-blog-embed-demo-ios.html")!
 	static let embedCode = """
-<script async src="https://cdn.tickaroo.com/webng/embedjs/tik4.js"></script>
-<tickaroo-liveblog liveblogId="62fe403f7fcc1170ab0151fd" themeId="lct_62fe4237202c865a30879595" clientId="5d2d9526560ace9935c7218a" />
+<html>
+	<head>
+		<title>Live Blog Embed Demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<script async src="https://cdn.tickaroo.com/webng/embedjs/tik4.js"></script>
+		<tickaroo-liveblog liveblogId="62fe403f7fcc1170ab0151fd" themeId="lct_62fe4237202c865a30879595" clientId="5d2d9526560ace9935c7218a" />
+	</body>
+</html>
 """
 }
