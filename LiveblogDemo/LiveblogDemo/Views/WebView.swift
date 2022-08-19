@@ -3,27 +3,17 @@ import UIKit
 import WebKit
 
 struct WebViewController: UIViewControllerRepresentable {
-	var url: URL
+	var contentType: EmbedWebViewController.ContentType
 
-	func makeUIViewController(context: Self.Context) -> EmbedUrlWebViewController {
-		.init(url: url)
+	func makeUIViewController(context: Self.Context) -> EmbedWebViewController {
+		.init(contentType: contentType)
 	}
 
-	func updateUIViewController(_ uiViewController: EmbedUrlWebViewController, context: Self.Context) {}
-}
-
-struct EmbedCodeWebView: UIViewRepresentable {
-	func makeUIView(context: Context) -> WKWebView {
-		return WKWebView()
-	}
-
-	func updateUIView(_ webView: WKWebView, context: Context) {
-		webView.loadHTMLString(Constants.embedCode, baseURL: URL(string: "https://cdn.tickaroo.com"))
-	}
+	func updateUIViewController(_ uiViewController: EmbedWebViewController, context: Self.Context) {}
 }
 
 struct WebView_Previews: PreviewProvider {
 	static var previews: some View {
-		WebViewController(url: Constants.embedUrl)
+		WebViewController(contentType: .url(Constants.embedUrl))
 	}
 }

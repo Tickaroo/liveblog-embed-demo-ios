@@ -2,6 +2,7 @@ import Foundation
 
 struct Constants {
 	static let embedUrl = URL(string: "http://builds.tickaroo.net/feedtest/demo-apps/live-blog-embed-demo-ios.html")!
+	static let embedCodeBaseUrl = URL(string: "https://cdn.tickaroo.com")!
 	static let embedCode = """
 <html>
 	<head>

@@ -3,7 +3,7 @@ import SwiftUI
 struct MainTabView: View {
 	var body: some View {
 		TabView {
-			WebViewController(url: Constants.embedUrl)
+			WebViewController(contentType: .url(Constants.embedUrl))
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
@@ -11,7 +11,7 @@ struct MainTabView: View {
 						Text("Embed url")
 					}
 				}
-			EmbedCodeWebView()
+			WebViewController(contentType: .embedCode(Constants.embedCode, Constants.embedCodeBaseUrl))
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
