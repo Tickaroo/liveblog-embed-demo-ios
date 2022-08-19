@@ -2,17 +2,14 @@ import SwiftUI
 import UIKit
 import WebKit
 
-struct WebView: UIViewRepresentable {
+struct WebViewController: UIViewControllerRepresentable {
 	var url: URL
 
-	func makeUIView(context: Context) -> WKWebView {
-		return WKWebView()
+	func makeUIViewController(context: Self.Context) -> EmbedUrlWebViewController {
+		.init(url: url)
 	}
 
-	func updateUIView(_ webView: WKWebView, context: Context) {
-		let request = URLRequest(url: url)
-		webView.load(request)
-	}
+	func updateUIViewController(_ uiViewController: EmbedUrlWebViewController, context: Self.Context) {}
 }
 
 struct EmbedCodeWebView: UIViewRepresentable {
@@ -27,6 +24,6 @@ struct EmbedCodeWebView: UIViewRepresentable {
 
 struct WebView_Previews: PreviewProvider {
 	static var previews: some View {
-		WebView(url: Constants.embedUrl)
+		WebViewController(url: Constants.embedUrl)
 	}
 }

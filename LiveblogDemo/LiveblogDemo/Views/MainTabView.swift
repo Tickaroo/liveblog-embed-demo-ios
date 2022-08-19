@@ -3,7 +3,7 @@ import SwiftUI
 struct MainTabView: View {
 	var body: some View {
 		TabView {
-			WebView(url: Constants.embedUrl)
+			WebViewController(url: Constants.embedUrl)
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
@@ -28,4 +28,3 @@ struct MainTabView_Previews: PreviewProvider {
 		MainTabView()
 	}
 }
-
