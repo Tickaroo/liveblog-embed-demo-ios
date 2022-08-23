@@ -11,7 +11,7 @@ struct MainTabView: View {
 						Text("Embed url")
 					}
 				}
-			WebViewController(contentType: .embedCode(Constants.embedCode, Constants.embedCodeBaseUrl))
+			WebViewController(contentType: .embedCode(Constants.embedCode, Constants.embedUrl))
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
