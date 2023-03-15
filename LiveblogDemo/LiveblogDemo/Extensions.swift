@@ -17,3 +17,25 @@ extension URL {
 		return components.queryItems?.first(where: { $0.name == "body" })?.value
 	}
 }
+
+import SwiftUI
+
+extension UIViewController {
+	private struct Preview: UIViewControllerRepresentable {
+		var viewController: UIViewController
+		
+		init(_ viewController: UIViewController) {
+			self.viewController = viewController
+		}
+		
+		func makeUIViewController(context: Self.Context) -> UIViewController {
+			viewController
+		}
+
+		func updateUIViewController(_ uiViewController: UIViewController, context: Self.Context) {}
+	}
+
+	var preview: some View {
+		Preview(self)
+	}
+}

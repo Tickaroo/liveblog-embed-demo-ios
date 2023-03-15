@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct MainTabView: View {
+	@State var selectedTab = 1
+
 	var body: some View {
-		TabView {
+		TabView(selection: $selectedTab) {
 			WebViewController(contentType: .url(Constants.embedUrl))
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
@@ -11,6 +13,7 @@ struct MainTabView: View {
 						Text("Embed url")
 					}
 				}
+				.tag(1)
 			WebViewController(contentType: .embedCode(Constants.embedCode, Constants.embedUrl))
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
@@ -19,6 +22,16 @@ struct MainTabView: View {
 						Text("Embed code")
 					}
 				}
+				.tag(2)
+			CollectionViewDemo().preview
+				.edgesIgnoringSafeArea(.top)
+				.tabItem {
+					VStack {
+						Image(systemName: "list.dash")
+						Text("Collection view")
+					}
+				}
+				.tag(3)
 		}
 	}
 }
