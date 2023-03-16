@@ -14,12 +14,16 @@ class EmbedCell: BaseCell {
 		webView.load(.init(url: Constants.collectionViewEmbedUrl))
 		webView.navigationDelegate = self
 		webView.uiDelegate = self
+		webView.scrollView.isScrollEnabled = false
 		
 		var lastHeight = CGFloat.zero
 		observation = webView.scrollView.observe(\.contentSize, options: .new) { [weak self] scrollView, change in
-			if let newHeight = change.newValue?.height, lastHeight != newHeight {
-				lastHeight = newHeight
-				self?.resizeCallback?(newHeight)
+			self?.webView.evaluateJavaScript("document.getElementsByClassName('tik4-live')[0].clientHeight") { data, error in
+				let padding = CGFloat(140)
+				if let newHeight = (data as? CGFloat).map({$0 + padding}), lastHeight != newHeight {
+					lastHeight = newHeight
+					self?.resizeCallback?(newHeight)
+				}
 			}
 		}
 	}
