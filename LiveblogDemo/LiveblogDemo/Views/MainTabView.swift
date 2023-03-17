@@ -5,10 +5,8 @@ struct MainTabView: View {
 
 	var body: some View {
 		TabView(selection: $selectedTab) {
-			UINavigationController(
-				rootViewController: EmbedWebViewController(contentType: .url(Constants.embedUrl))
-			).preview
-				.edgesIgnoringSafeArea(.top)
+			EmbedWebViewController(contentType: .url(Constants.embedUrl))
+				.preview
 				.tabItem {
 					VStack {
 						Image(systemName: "globe")
@@ -19,7 +17,6 @@ struct MainTabView: View {
 			UINavigationController(
 				rootViewController: EmbedWebViewController(contentType: .embedCode(Constants.embedCode, Constants.embedUrl))
 			).preview
-				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
 						Image(systemName: "externaldrive.fill")
@@ -28,7 +25,6 @@ struct MainTabView: View {
 				}
 				.tag(2)
 			CollectionViewDemo().preview
-				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
 						Image(systemName: "list.dash")
