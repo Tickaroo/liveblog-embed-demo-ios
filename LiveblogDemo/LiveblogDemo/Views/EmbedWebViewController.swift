@@ -6,6 +6,15 @@ class EmbedWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
 	enum ContentType {
 		case url(URL)
 		case embedCode(String, URL?)
+		
+		var title: String {
+			switch self {
+			case .url:
+				return "Embed url demo"
+			case .embedCode:
+				return "Embed code demo"
+			}
+		}
 	}
 
 	let contentType: ContentType
@@ -14,6 +23,7 @@ class EmbedWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
 	init(contentType: ContentType) {
 		self.contentType = contentType
 		super.init(nibName: nil, bundle: nil)
+		title = contentType.title
 	}
 
 	required init?(coder: NSCoder) {

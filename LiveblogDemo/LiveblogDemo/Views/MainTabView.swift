@@ -5,7 +5,9 @@ struct MainTabView: View {
 
 	var body: some View {
 		TabView(selection: $selectedTab) {
-			WebViewController(contentType: .url(Constants.embedUrl))
+			UINavigationController(
+				rootViewController: EmbedWebViewController(contentType: .url(Constants.embedUrl))
+			).preview
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
@@ -14,7 +16,9 @@ struct MainTabView: View {
 					}
 				}
 				.tag(1)
-			WebViewController(contentType: .embedCode(Constants.embedCode, Constants.embedUrl))
+			UINavigationController(
+				rootViewController: EmbedWebViewController(contentType: .embedCode(Constants.embedCode, Constants.embedUrl))
+			).preview
 				.edgesIgnoringSafeArea(.top)
 				.tabItem {
 					VStack {
