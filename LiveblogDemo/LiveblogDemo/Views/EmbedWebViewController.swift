@@ -32,7 +32,7 @@ class EmbedWebViewController: UIViewController, WKNavigationDelegate, WKUIDelega
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		navigationController?.navigationBar.isTranslucent = false
 		webView.navigationDelegate = self
 		webView.uiDelegate = self
 		view.addSubview(webView)
