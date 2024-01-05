@@ -3,15 +3,34 @@ import UIKit
 import WebKit
 
 class EmbedCell: BaseCell {
-	lazy var webView = WKWebView()
+	var webView: WKWebView!
 	var resizeCallback: ((CGFloat) -> Void)?
+	var scrollCallback: ((CGFloat) -> Void)?
 	var openMailUrl: ((URL) -> Bool)?
-	
+	private var handler: ScriptMessageHandler?
 	private var observation: NSKeyValueObservation?
 	
 	override func setupViews() {
+		// Any way of listening to js function can work here. ScriptMessageHandler is just one way of doing it.
+		let handler = ScriptMessageHandler(callbacks: [
+			.init(
+				script: """
+						window.tickarooLiveblogScrollTo = function (top) {
+							window.webkit.messageHandlers.scrollToSwift.postMessage({"top": top});
+						};
+					""", 
+				functionName: "scrollToSwift",
+				callback: { [weak self] dict in
+					guard let top = dict["top"] as? CGFloat else { return }
+					self?.scrollCallback?(top)
+				}
+			)
+		])
+		webView = .init(frame: .zero, configuration: handler.config)
+		self.handler = handler
 		addSubview(webView)
-		webView.load(.init(url: Constants.collectionViewEmbedUrl))
+		
+		webView.loadHTMLString(Constants.embedCodeWithAnchors, baseURL: Constants.collectionViewEmbedUrl)
 		webView.navigationDelegate = self
 		webView.uiDelegate = self
 		webView.scrollView.isScrollEnabled = false

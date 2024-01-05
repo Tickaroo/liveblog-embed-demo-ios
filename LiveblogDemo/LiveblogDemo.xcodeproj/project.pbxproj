@@ -16,6 +16,7 @@
 		BA2EA73028AF6BD3004554CC /* EmbedWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2EA72F28AF6BD3004554CC /* EmbedWebViewController.swift */; };
 		BA2EA73228AF6C2B004554CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2EA73128AF6C2B004554CC /* Extensions.swift */; };
 		BA647CD129C1B650005871D7 /* CollectionViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA647CD029C1B650005871D7 /* CollectionViewDemo.swift */; };
+		BAB7D8C52B47F678009C2B69 /* ScriptMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7D8C42B47F678009C2B69 /* ScriptMessageHandler.swift */; };
 		BADC233D29C1CA38005D392A /* EmbedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADC233C29C1CA38005D392A /* EmbedCell.swift */; };
 		BADC233F29C1CAD0005D392A /* SimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADC233E29C1CAD0005D392A /* SimpleCell.swift */; };
 		BADC234129C1CAE5005D392A /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADC234029C1CAE5005D392A /* BaseCell.swift */; };
@@ -33,6 +34,7 @@
 		BA2EA72F28AF6BD3004554CC /* EmbedWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedWebViewController.swift; sourceTree = "<group>"; };
 		BA2EA73128AF6C2B004554CC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BA647CD029C1B650005871D7 /* CollectionViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDemo.swift; sourceTree = "<group>"; };
+		BAB7D8C42B47F678009C2B69 /* ScriptMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessageHandler.swift; sourceTree = "<group>"; };
 		BADC233C29C1CA38005D392A /* EmbedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedCell.swift; sourceTree = "<group>"; };
 		BADC233E29C1CAD0005D392A /* SimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCell.swift; sourceTree = "<group>"; };
 		BADC234029C1CAE5005D392A /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				BA01494728AE8710009090BA /* Assets.xcassets */,
 				BA01495128AE87A7009090BA /* Constants.swift */,
 				BA01494528AE870F009090BA /* ContentView.swift */,
+				BAB7D8C42B47F678009C2B69 /* ScriptMessageHandler.swift */,
 				BA2EA73128AF6C2B004554CC /* Extensions.swift */,
 				BA01494928AE8710009090BA /* Preview Content */,
 			);
@@ -182,6 +185,7 @@
 				BA01494628AE870F009090BA /* ContentView.swift in Sources */,
 				BA2EA73028AF6BD3004554CC /* EmbedWebViewController.swift in Sources */,
 				BA01494428AE870F009090BA /* LiveblogDemoApp.swift in Sources */,
+				BAB7D8C52B47F678009C2B69 /* ScriptMessageHandler.swift in Sources */,
 				BADC233D29C1CA38005D392A /* EmbedCell.swift in Sources */,
 				BA01495228AE87A7009090BA /* Constants.swift in Sources */,
 				BA227F1C28AE8A8600B2C9C1 /* MainTabView.swift in Sources */,

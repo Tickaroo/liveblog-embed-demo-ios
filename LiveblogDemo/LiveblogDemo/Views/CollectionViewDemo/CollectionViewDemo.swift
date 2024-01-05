@@ -58,6 +58,12 @@ extension CollectionViewDemo: UICollectionViewDelegateFlowLayout {
 					UIView.setAnimationsEnabled(true)
 				})
 			}
+			cell.scrollCallback = { [weak self] top in
+				self?.collectionView.setContentOffset(
+					.init(x: 0, y: cell.frame.minY + top),
+					animated: true
+				)
+			}
 			cell.openMailUrl = { [weak self] url in 
 				if MFMessageComposeViewController.canSendText() {
 					let composeVC = MFMailComposeViewController()
