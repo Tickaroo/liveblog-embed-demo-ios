@@ -2,10 +2,16 @@ import MessageUI
 import UIKit
 import WebKit
 
+struct ScrollRequest {
+	let top: CGFloat
+	let correction: Bool
+	let jumpId: Int
+}
+
 class EmbedCell: BaseCell {
 	var webView: WKWebView!
 	var resizeCallback: ((CGFloat) -> Void)?
-	var scrollCallback: ((CGFloat) -> Void)?
+	var scrollCallback: ((ScrollRequest) -> Void)?
 	var openMailUrl: ((URL) -> Bool)?
 	private var handler: ScriptMessageHandler?
 	private var observation: NSKeyValueObservation?
@@ -14,15 +20,25 @@ class EmbedCell: BaseCell {
 		// Any way of listening to js function can work here. ScriptMessageHandler is just one way of doing it.
 		let handler = ScriptMessageHandler(callbacks: [
 			.init(
+				// The embed passes `info` only to a function that declares both parameters (no default values),
+				// and older embeds call it with `top` alone.
 				script: """
-						window.tickarooLiveblogScrollTo = function (top) {
-							window.webkit.messageHandlers.scrollToSwift.postMessage({"top": top});
+						window.tickarooLiveblogScrollTo = function (top, info) {
+							window.webkit.messageHandlers.scrollToSwift.postMessage({
+								"top": top,
+								"correction": !!(info && info.correction),
+								"jumpId": (info && info.jumpId) || 0
+							});
 						};
 					""", 
 				functionName: "scrollToSwift",
 				callback: { [weak self] dict in
 					guard let top = dict["top"] as? CGFloat else { return }
-					self?.scrollCallback?(top)
+					self?.scrollCallback?(.init(
+						top: top,
+						correction: dict["correction"] as? Bool ?? false,
+						jumpId: dict["jumpId"] as? Int ?? 0
+					))
 				}
 			)
 		])
