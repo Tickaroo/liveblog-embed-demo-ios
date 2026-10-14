@@ -22,6 +22,7 @@ class CollectionViewDemo: UIViewController {
 	private var activeJumpId: Int?
 	private var requestedPostY: CGFloat = 0
 	private var isJumpAnimating = false
+	private var isJumpClamped = false
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -40,13 +41,20 @@ class CollectionViewDemo: UIViewController {
 	}
 
 	private func scrollToRequestedPost() {
+		// contentSize is not updated yet when performBatchUpdates completes
+		collectionView.layoutIfNeeded()
 		let inset = collectionView.adjustedContentInset
 		let minY = -inset.top
 		let maxY = max(minY, collectionView.contentSize.height + inset.bottom - collectionView.bounds.height)
-		let target = CGPoint(x: collectionView.contentOffset.x, y: min(max(requestedPostY - inset.top, minY), maxY))
-		// scrollViewDidEndScrollingAnimation is not called for an animation to the current offset
-		isJumpAnimating = abs(target.y - collectionView.contentOffset.y) >= 1
-		collectionView.setContentOffset(target, animated: isJumpAnimating)
+		let desiredY = requestedPostY - inset.top
+		let target = CGPoint(x: collectionView.contentOffset.x, y: min(max(desiredY, minY), maxY))
+		// A correction can arrive before the embed cell has grown, so the next resize re-applies a clamped target
+		isJumpClamped = desiredY > maxY
+		// scrollViewDidEndScrollingAnimation is not called for an animation to the current offset,
+		// but it is called for the running animation when a new one replaces it, so the flag is set afterwards
+		let animated = abs(target.y - collectionView.contentOffset.y) >= 1
+		collectionView.setContentOffset(target, animated: animated)
+		isJumpAnimating = animated
 	}
 }
 
@@ -65,16 +73,15 @@ extension CollectionViewDemo: UICollectionViewDelegateFlowLayout {
 			cell.resizeCallback = { [weak self] newHeight in
 				// Keeping the offset on a variable and setting afterwards to keep the scroll position consistent
 				let offset = self?.collectionView.contentOffset ?? .zero
-				// Restoring the offset would stop a jump mid-animation, so the jump is re-aimed instead
-				let jumpInFlight = self?.isJumpAnimating ?? false
+				// Restoring the offset stops a jump mid-animation and keeps a clamped jump short, so the jump is re-aimed afterwards
+				let reaimJump = (self?.isJumpAnimating ?? false) || (self?.isJumpClamped ?? false)
 				self?.embedHeight = newHeight
 				UIView.setAnimationsEnabled(false)
 				self?.collectionView.performBatchUpdates(nil, completion: { _ in 
 					UIView.setAnimationsEnabled(true)
-					if jumpInFlight, self?.activeJumpId != nil {
+					self?.collectionView.setContentOffset(offset, animated: false)
+					if reaimJump, self?.activeJumpId != nil {
 						self?.scrollToRequestedPost()
-					} else {
-						self?.collectionView.setContentOffset(offset, animated: false)
 					}
 				})
 			}
