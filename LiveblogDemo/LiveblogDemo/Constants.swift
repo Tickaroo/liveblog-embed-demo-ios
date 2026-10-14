@@ -22,7 +22,7 @@ struct Constants {
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<script async src="https://staging-cdn.tickaroo.com/webng/embedjs/tik4.js" data-tik4-baseUrl="https://staging-cdn.tickaroo.com"></script>
+		<script async src="https://www.tickaroo-staging.com/webng/embedjs/tik4.js" data-tik4-baseUrl="https://www.tickaroo-staging.com"></script>
 		<tickaroo-liveblog liveblogId="648bec97cefae341d3c9c07d" automaticSummary="highlights" locale="de" useSlideshow="false" clientId="5a9672a2e4b02b9bd5822845"></tickaroo-liveblog>
 	</body>
 </html>
