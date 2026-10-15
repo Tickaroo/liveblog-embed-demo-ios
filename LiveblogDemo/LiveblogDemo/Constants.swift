@@ -22,8 +22,8 @@ struct Constants {
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<script async src="https://staging-cdn.tickaroo.com/webng/embedjs/tik4.js" data-tik4-baseUrl="https://staging-cdn.tickaroo.com"></script>
-		<tickaroo-liveblog liveblogId="648bec97cefae341d3c9c07d" automaticSummary="highlights" locale="de" useSlideshow="false" clientId="5a9672a2e4b02b9bd5822845"></tickaroo-liveblog>
+		<script async src="https://cdn.tickaroo.com/webng/embedjs/tik4.js"></script>
+		<tickaroo-liveblog liveblogId="62fe403f7fcc1170ab0151fd" themeId="lct_62fe4237202c865a30879595" automaticSummary="highlights" locale="de" useSlideshow="false" clientId="5d2d9526560ace9935c7218a"></tickaroo-liveblog>
 	</body>
 </html>
 """
